@@ -1,177 +1,47 @@
 <!--Author: Sumanth-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Test Cases Generator</title>
-	<link type="image/png" sizes="96x96" rel="icon" href="https://img.icons8.com/fluency/48/bot.png">
-    <style>
-        .container {
-            width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #666;
-            border-radius: 5px;
-        }
-
-        .input-group button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #555;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #666;
-            border-radius: 5px;
-            white-space: pre-wrap;
-        }
-
-        #copyButton {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #555;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-    </style>
-    <script>
-        function generateTestCases() {
-            var methodName = document.getElementById('methodName').value;
-            var classNames = document.getElementById('classNames').value;
-            var classValues = document.getElementById('classValues').value;
-            var controllerName = document.getElementById('controllerName').value;
-            var returnValue = document.getElementById('returnValue').value;
-
-            // Check if all required fields are filled
-            if (!methodName || !classNames || !classValues || !controllerName || !returnValue) {
-                alert('Please fill in all the required fields.');
-                return;
-            }
-
-            // Split the class names and generate statements for each class
-            var classNamesArray = classNames.split(',');
-            var classValuesArray = classValues.split(',');
-            var statements = [];
-            for (var i = 0; i < classNamesArray.length; i++) {
-                var className = classNamesArray[i].trim();
-                var classNameSmall = className.toLowerCase();
-                var classValue = classValuesArray[i].trim();
-                var statement = className + ' ' + classNameSmall + ' = learningService.loadEntity(' + className + '.class, "' + classValue + '");';
-                statements.push(statement);
-            }
-
-            // Generate the test cases
-            var testCase = `
-@Test
-public void ${methodName}_works() {
-    Person person = super.createTnlAdmin();
-    ${statements.join('\n    ')}
-    super.createPersonExpectations(person);
-    ModelAndView mvRet = new ModelAndView();
-    ${controllerName} controller = createController();
-    when(sessionService.getSessionPerson()).thenReturn(person);
-    final TestHtmlHelper html = new TestHtmlHelper();
-    PdsHelper h = mock(PdsHelper.class);
-    html.setPdsHelper_TESTONLY(h);
-    when(${returnValue}).thenReturn(mvRet);
-    ModelAndView mv = controller.${methodName}(Long.parseLong("${classValuesArray[0]}"));
-    Assert.assertSame(mvRet, mv);
-}
-
-@Test
-public void ${methodName}_noUser() {
-    super.createNoPersonExpectations();
-    ${controllerName} controller = createController();
-    ModelAndView mv = controller.${methodName}(Long.parseLong("10369"));
-    super.validateModelAndViewIsUnAuthorized(mv);
-}`;
-
-            // Set the test cases as the result
-            var resultContainer = document.getElementById('result');
-            resultContainer.innerHTML = '<code>' + testCase + '</code><br><button id="copyButton" onclick="copyCode()">Copy</button>';
-
-            // Clear the input fields
-            document.getElementById('methodName').value = '';
-            document.getElementById('classNames').value = '';
-            document.getElementById('classValues').value = '';
-            document.getElementById('controllerName').value = '';
-            document.getElementById('returnValue').value = '';
-        }
-
-        function copyCode() {
-            var codeSnippet = document.querySelector('#result code');
-            var range = document.createRange();
-            range.selectNode(codeSnippet);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            alert('Code snippet copied to clipboard!');
-        }
-    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://img.icons8.com/fluency/48/bot.png">
+	<script src="index.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h1>Test Cases Generator</h1>
-        <div class="input-group">
-            <label for="methodName">Method Name:</label>
-            <input type="text" id="methodName" required>
-        </div>
-        <div class="input-group">
-            <label for="classNames">Class Names (separated by commas):</label>
-            <input type="text" id="classNames" required>
-        </div>
-        <div class="input-group">
-            <label for="classValues">Class Values (separated by commas):</label>
-            <input type="text" id="classValues" required>
-        </div>
-        <div class="input-group">
-            <label for="controllerName">Controller Name:</label>
-            <input type="text" id="controllerName" required>
-        </div>
-        <div class="input-group">
-            <label for="returnValue">Return Statement (with parameters):</label>
-            <input type="text" id="returnValue" required>
-        </div>
-        <div class="input-group">
-            <button onclick="generateTestCases()">Generate Test Cases</button>
+	<h1>Test Cases Generator</h1>
+        
+        <div class="card">
+            <div class="form-group">
+                <label for="methodName" class="form-label">Method Name:</label>
+                <input type="text" id="methodName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="classNames" class="form-label">Class Names (separated by commas):</label>
+                <input type="text" id="classNames" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="classValues" class="form-label">Class Values (separated by commas):</label>
+                <input type="text" id="classValues" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="controllerName" class="form-label">Controller Name:</label>
+                <input type="text" id="controllerName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="returnValue" class="form-label">Return Statement (with parameters):</label>
+                <input type="text" id="returnValue" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <button class="btn-generate" onclick="generateTestCases()">Generate Test Cases</button>
+            </div>
         </div>
         <div id="result"></div>
-    </div>
 </body>
 
 </html>
