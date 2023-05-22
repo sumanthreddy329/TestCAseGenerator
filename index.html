@@ -75,6 +75,12 @@
             var controllerName = document.getElementById('controllerName').value;
             var returnValue = document.getElementById('returnValue').value;
 
+            // Check if all required fields are filled
+            if (!methodName || !classNames || !classValues || !controllerName || !returnValue) {
+                alert('Please fill in all the required fields.');
+                return;
+            }
+
             // Split the class names and generate statements for each class
             var classNamesArray = classNames.split(',');
             var classValuesArray = classValues.split(',');
@@ -111,11 +117,11 @@ public void ${methodName}_noUser() {
     ${controllerName} controller = createController();
     ModelAndView mv = controller.${methodName}(Long.parseLong("10369"));
     super.validateModelAndViewIsUnAuthorized(mv);
-}
-`;
+}`;
 
             // Set the test cases as the result
-            document.getElementById('result').innerHTML = '<code>' + testCase + '</code><br><button id="copyButton" onclick="copyCode()">Copy</button>';
+            var resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = '<code>' + testCase + '</code><br><button id="copyButton" onclick="copyCode()">Copy</button>';
 
             // Clear the input fields
             document.getElementById('methodName').value = '';
@@ -162,7 +168,7 @@ public void ${methodName}_noUser() {
             <input type="text" id="returnValue" required>
         </div>
         <div class="input-group">
-            <button onclick="generateTestCases()">Generate</button>
+            <button onclick="generateTestCases()">Generate Test Cases</button>
         </div>
         <div id="result"></div>
     </div>
