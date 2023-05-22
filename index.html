@@ -14,34 +14,36 @@
 
 <body>
     <div class="container">
-	<h1>Test Cases Generator</h1>
+        <h1>Test Cases Generator</h1>
         
         <div class="card">
             <div class="form-group">
                 <label for="methodName" class="form-label">Method Name:</label>
-                <input type="text" id="methodName" class="form-control" required>
+                <input type="text" id="methodName" class="form-control" required placeholder="Enter method name">
             </div>
             <div class="form-group">
                 <label for="classNames" class="form-label">Class Names (separated by commas):</label>
-                <input type="text" id="classNames" class="form-control" required>
+                <input type="text" id="classNames" class="form-control" required placeholder="Enter class names">
             </div>
             <div class="form-group">
                 <label for="classValues" class="form-label">Class Values (separated by commas):</label>
-                <input type="text" id="classValues" class="form-control" required>
+                <input type="text" id="classValues" class="form-control" required placeholder="Enter class values">
             </div>
             <div class="form-group">
                 <label for="controllerName" class="form-label">Controller Name:</label>
-                <input type="text" id="controllerName" class="form-control" required>
+                <input type="text" id="controllerName" class="form-control" required placeholder="Enter controller name">
             </div>
             <div class="form-group">
                 <label for="returnValue" class="form-label">Return Statement (with parameters):</label>
-                <input type="text" id="returnValue" class="form-control" required>
+                <input type="text" id="returnValue" class="form-control" required placeholder="Enter return statement">
             </div>
             <div class="form-group">
                 <button class="btn-generate" onclick="generateTestCases()">Generate Test Cases</button>
             </div>
         </div>
         <div id="result"></div>
+    </div>
 </body>
+
 
 </html>
