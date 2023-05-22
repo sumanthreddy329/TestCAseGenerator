@@ -26,29 +26,29 @@
 
             // Generate the test cases
             var testCase = `
-					@Test
-					public void ${methodName}_works() {
-						Person person = super.createTnlAdmin();
-						${statements.join('\n    ')}
-						super.createPersonExpectations(person);
-						ModelAndView mvRet = new ModelAndView();
-						${controllerName} controller = createController();
-						when(sessionService.getSessionPerson()).thenReturn(person);
-						final TestHtmlHelper html = new TestHtmlHelper();
-						PdsHelper h = mock(PdsHelper.class);
-						html.setPdsHelper_TESTONLY(h);
-						when(${returnValue}).thenReturn(mvRet);
-						ModelAndView mv = controller.${methodName}(Long.parseLong("${classValuesArray[0]}"));
-						Assert.assertSame(mvRet, mv);
-					}
+@Test
+public void ${methodName}_works() {
+    Person person = super.createTnlAdmin();
+    ${statements.join('\n    ')}
+    super.createPersonExpectations(person);
+    ModelAndView mvRet = new ModelAndView();
+    ${controllerName} controller = createController();
+    when(sessionService.getSessionPerson()).thenReturn(person);
+    final TestHtmlHelper html = new TestHtmlHelper();
+    PdsHelper h = mock(PdsHelper.class);
+    html.setPdsHelper_TESTONLY(h);
+    when(${returnValue}).thenReturn(mvRet);
+    ModelAndView mv = controller.${methodName}(Long.parseLong("${classValuesArray[0]}"));
+    Assert.assertSame(mvRet, mv);
+}
 
-					@Test
-					public void ${methodName}_noUser() {
-						super.createNoPersonExpectations();
-						${controllerName} controller = createController();
-						ModelAndView mv = controller.${methodName}(Long.parseLong("${classValuesArray[0]}"));
-						super.validateModelAndViewIsUnAuthorized(mv);
-					}`;
+@Test
+public void ${methodName}_noUser() {
+    super.createNoPersonExpectations();
+    ${controllerName} controller = createController();
+    ModelAndView mv = controller.${methodName}(Long.parseLong("${classValuesArray[0]}"));
+    super.validateModelAndViewIsUnAuthorized(mv);
+}`;
 
             // Set the test cases as the result
             var resultContainer = document.getElementById('result');
