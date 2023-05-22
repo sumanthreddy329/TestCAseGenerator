@@ -72,3 +72,4 @@
             window.getSelection().removeAllRanges();
             alert('Code snippet copied to clipboard!');
         }
+		
