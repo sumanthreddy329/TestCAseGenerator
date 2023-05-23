@@ -52,6 +52,7 @@ public void ${methodName}_noUser() {
   ModelAndView mv = controller.${methodName}(${statements.join(', ')});
   super.validateModelAndViewIsUnAuthorized(mv);
 }`;
+	$('#result').show();
 
   // Set the test cases as the result
   var resultContainer = $('#result');
@@ -108,6 +109,7 @@ public void ${methodName}_noUser() {
   ModelAndView mv = controller.${methodName}(Long.parseLong("${classValuesArray[0]}"));
   super.validateModelAndViewIsUnAuthorized(mv);
 }`;
+	$('#result').show();
 
   // Set the test cases as the result
   var resultContainer = $('#result');
