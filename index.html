@@ -9,33 +9,39 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" sizes="96x96" href="https://img.icons8.com/fluency/48/bot.png">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="index.js"></script>
 </head>
 
 <body>
     <div class="container">
         <h1>Test Cases Generator</h1>
+		<select id="dropdown" class="dropdown">
+			<option value="" selected disabled>Choose One</option>
+			<option value="longIdRet">Returns LongID</option>
+			<option value="classObjRet">Returns an object</option>
+		</select>
         
         <div class="card">
-            <div class="form-group">
+            <div class="form-group method-name">
                 <label for="methodName" class="form-label">Method Name:</label>
-                <input type="text" id="methodName" class="form-control" required placeholder="Enter method name">
+                <input type="text" id="methodName" class="form-control" placeholder="Enter method name">
             </div>
-            <div class="form-group">
+            <div class="form-group class-names">
                 <label for="classNames" class="form-label">Class Names (separated by commas):</label>
-                <input type="text" id="classNames" class="form-control" required placeholder="Enter class names">
+                <input type="text" id="classNames" class="form-control" placeholder="Enter class names">
             </div>
-            <div class="form-group">
+            <div class="form-group class-values">
                 <label for="classValues" class="form-label">Class Values (separated by commas):</label>
-                <input type="text" id="classValues" class="form-control" required placeholder="Enter class values">
+                <input type="text" id="classValues" class="form-control" placeholder="Enter class values">
             </div>
-            <div class="form-group">
+            <div class="form-group controller-name">
                 <label for="controllerName" class="form-label">Controller Name:</label>
-                <input type="text" id="controllerName" class="form-control" required placeholder="Enter controller name">
+                <input type="text" id="controllerName" class="form-control" placeholder="Enter controller name">
             </div>
-            <div class="form-group">
+            <div class="form-group return-statement">
                 <label for="returnValue" class="form-label">Return Statement (with parameters):</label>
-                <input type="text" id="returnValue" class="form-control" required placeholder="Enter return statement">
+                <input type="text" id="returnValue" class="form-control" placeholder="Enter return statement">
             </div>
             <div class="form-group">
                 <button class="btn-generate" onclick="generateTestCases()">Generate Test Cases</button>
@@ -47,3 +53,4 @@
 
 
 </html>
+
