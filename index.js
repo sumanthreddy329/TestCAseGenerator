@@ -128,6 +128,7 @@ function copyCode() {
 $(document).ready(function () {
   // Hide the card initially
   $('.card').hide();
+	$('#result').hide();
 
   // Show/hide card and load script based on dropdown selection
   $('#dropdown').on('change', function () {
